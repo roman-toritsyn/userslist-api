@@ -1,4 +1,3 @@
-
 const BASE_URL = 'https://randomuser.me/api/?results=15&inc=gender,email,dob,name,picture,nat';
 
 export const request = (urlForFilter = '') => {
