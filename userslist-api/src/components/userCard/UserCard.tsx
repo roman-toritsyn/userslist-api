@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './styles.scss';
+
 type Props = {
   gender: string,
   email: string,
@@ -20,28 +22,37 @@ export const UserCard: React.FC<Props> = React.memo(
   }) => {
     return (
       <div
-        className="card"
+        className="userCard"
       >
-        <figure>
+        <div className="userCard__img-container">
           <img
+          className="userCard__img"
             src={picture}
             alt={userName}
           />
-        </figure>
+        </div>
   
-      <p>
+      <h2 className="userCard__title">
       {userName}
-      </p>
+      </h2>
   
-        <span>
-          {gender}
-          <br/>
-          {email}
-          <br/>
-          {dob}
-          <br/>
+        <section className="userCard__info">
+          <div className="userCard__info-gender">
+            {gender}
+          </div>
+
+          <div className="userCard__info-email">
+            {email}
+          </div>
+
+          <div className="userCard__info-dob">
+            {dob}
+          </div>
+
+          <div className="userCard__info-nat">
           {nat}
-        </span>
+          </div>
+        </section>
       </div>
     )
   }

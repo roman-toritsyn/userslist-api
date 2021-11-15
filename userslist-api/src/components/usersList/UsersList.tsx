@@ -4,6 +4,8 @@ import { useLocalStorage } from "../../customHooks/useLocalStorage";
 import { SelectedNats } from "../selectedNats";
 import { UserCard } from "../userCard";
 
+import "./styles.scss";
+
 type User = {
   gender: string,
   email: string,
@@ -47,6 +49,7 @@ export const UsersList = () => {
   return (
     <div>
       <form
+        className="findUserForm"
         onSubmit={(event) => {
           event.preventDefault();
 
@@ -61,76 +64,70 @@ export const UsersList = () => {
           }
         }}
       >
-        <label htmlFor="gender-select">Select gender</label>
-        <select
-          name="gender"
-          id="gender-select"
-          value={selectedGender}
-          onChange={(event) => setSelectedGender(event.target.value)}
-        >
-          <option value="">
-            Male and Female
-          </option>
-          <option value="&amp;gender=male">
-            Male
-          </option>
-          <option value="&amp;gender=female">
-            Female
-          </option>
-        </select>
+        <div className="findUserForm__genderSelect">
+          <label htmlFor="genderSelect">Select gender</label>
+          <select
+            name="gender"
+            id="genderSelect"
+            value={selectedGender}
+            onChange={(event) => setSelectedGender(event.target.value)}
+          >
+            <option value="">
+              Male and Female
+            </option>
+            <option value="&amp;gender=male">
+              Male
+            </option>
+            <option value="&amp;gender=female">
+              Female
+            </option>
+          </select>
+        </div>
 
-        <label htmlFor="nationality">Select nationality</label>
-        <select
-          name="nationality"
-          id="nationality"
-          size={5}
-          onChange={event => {
-            if (event.target.value === 'all-nationalities') {
-              setSelectedNationalities(['&nat=']);
-              return;
-            }
+        <div className="findUserForm__natSelect">
+          <label htmlFor="nationality">Select nationality</label>
+          <select
+            name="nationality"
+            id="nationality"
+            size={5}
+            onChange={event => {
+              if (event.target.value === 'all-nationalities') {
+                setSelectedNationalities(['&nat=']);
+                return;
+              }
 
-            if (!selectedNationalities.includes(event.target.value)) {
-              setSelectedNationalities([...selectedNationalities, event.target.value]);
-            }
-          }}
-        >
-          <option value="all-nationalities">
-            All nationalities
-          </option>
-          {selectNatOptions}
-        </select>
+              if (!selectedNationalities.includes(event.target.value)) {
+                setSelectedNationalities([...selectedNationalities, event.target.value]);
+              }
+            }}
+          >
+            <option value="all-nationalities">
+              All nationalities
+            </option>
+            {selectNatOptions}
+          </select>
+        </div>
+            <SelectedNats selectedNationalities={selectedNationalities}/>
 
-          <SelectedNats selectedNationalities={selectedNationalities}/>
 
-        <button type="submit">
+        <button className="findUserForm__submitButton" type="submit">
           FInd users
         </button>
       </form>
 
-      <button
-        onClick={() => {
-          console.log(users);
-          console.log(selectedGender);
-          console.log(selectedNationalities);
-        }
-        }
-      >
-        show users log
-      </button>
-
-      {users.map(user => (
-        <UserCard
-          key={user.email}
-          gender={user.gender}
-          email={user.email}
-          dob={getDate(user.dob.date)}
-          userName={`${user.name.first} ${user.name.last}`}
-          picture={user.picture.large}
-          nat={user.nat}
-        />
-      ))}
-
+      <div className="cardsContainer">
+        {users.map(user => (
+          <UserCard
+            key={user.email}
+            gender={user.gender}
+            email={user.email}
+            dob={getDate(user.dob.date)}
+            userName={`${user.name.first} ${user.name.last}`}
+            picture={user.picture.large}
+            nat={user.nat}
+          />
+        ))}
+      </div>
     </div>
   )
 }

@@ -1,0 +1,15 @@
+.selectedNats {
+  display: flex;
+  margin-right: 20px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  width: 75px;
+
+  &__nat {
+    width: 20px;
+    height: 15px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+  }
+}

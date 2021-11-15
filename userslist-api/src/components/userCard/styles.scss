@@ -1,4 +1,61 @@
 .userCard {
+  width: 230px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 25px;
+  padding: 20px;
+  border: 2px solid #a2836e;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(162, 131, 110, 1);
+  background-color: #d9ad7c;
+
+  &:hover {
+    box-shadow: 0 8px 16px 0 rgba(162, 131, 110, 1);
+  }
+
+  &__img-container {
+    margin: 0 auto;
+    box-sizing: border-box;
+    
+    :hover {
+      transition-duration: 0.3s;
+      transform: scale(1.1);
+    }
+  }
+
+  &__img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+  }
+
+  &__title {
+    font-size: 20px;
+    color: #674d3c;
+    font-weight: 700;
+    align-self: center;
+  }
+
+  &__info {
+    color: #674d3c;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &-gender {
+      margin-bottom: 5px;
+      width: max-content;
+      align-self: flex-end;
+    }
+
+    &-email{
+      margin-bottom: 5px;
+    }
+
+    &-dob {
+      margin-bottom: 5px;
+      width: max-content;
+      align-self: flex-end;
+    }
+  }
 }
