@@ -1,7 +1,7 @@
 # React UserList app
 [DEMO_LINK](https://roman-toritsyn.github.io/userslist-api/)
 
-##Description
+## Description
 Simple UserList that loades users from the API.
 
 ### Implemented tasks:
