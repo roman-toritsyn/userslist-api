@@ -13,5 +13,6 @@ Simple UserList that loades users from the API.
 * *** ***All filters will be applied only after submitting.***
 * *** ***Cards rerender only after submitting.***
 * *** ***Selected options stay the same after reloading the page.***
+* Hints added on 'Select gender' and 'Select nationality' hover.
 
 
