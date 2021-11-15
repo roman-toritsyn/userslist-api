@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { request } from "../../api";
+import { useLocalStorage } from "../../customHooks/useLocalStorage";
+import { SelectedNats } from "../selectedNats";
 import { UserCard } from "../userCard";
 
 type User = {
@@ -20,8 +22,8 @@ type User = {
 
 export const UsersList = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const [selectedGender, setSelectedGender] = useState('');
-  const [selectedNationalities, setSelectedNationalities] = useState<string[]>(['&nat=']);
+  const [selectedGender, setSelectedGender] = useLocalStorage('selectedGender', '');
+  const [selectedNationalities, setSelectedNationalities] = useLocalStorage('selectedNat', ['&nat=']);
 
   useEffect(() => {
     request()
@@ -53,7 +55,9 @@ export const UsersList = () => {
 
             request(filterUrl)
               .then(responce => setUsers(responce.results));
-
+          } else {
+            request()
+              .then(responce => setUsers(responce.results));
           }
         }}
       >
@@ -65,7 +69,7 @@ export const UsersList = () => {
           onChange={(event) => setSelectedGender(event.target.value)}
         >
           <option value="">
-            Choose a gender
+            Male and Female
           </option>
           <option value="&amp;gender=male">
             Male
@@ -81,18 +85,27 @@ export const UsersList = () => {
           id="nationality"
           size={5}
           onChange={event => {
+            if (event.target.value === 'all-nationalities') {
+              setSelectedNationalities(['&nat=']);
+              return;
+            }
+
             if (!selectedNationalities.includes(event.target.value)) {
               setSelectedNationalities([...selectedNationalities, event.target.value]);
             }
           }}
         >
+          <option value="all-nationalities">
+            All nationalities
+          </option>
           {selectNatOptions}
         </select>
 
-        <button type="submit">
-          Find users
-        </button>
+          <SelectedNats selectedNationalities={selectedNationalities}/>
 
+        <button type="submit">
+          FInd users
+        </button>
       </form>
 
       <button
